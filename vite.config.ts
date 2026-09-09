@@ -10,10 +10,10 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Crescent Bay Surf',
-        short_name: 'Crescent Bay',
+        name: 'Laguna Beach Surf',
+        short_name: 'Laguna Surf',
         description:
-          'Live tides, waves, and weather for Crescent Bay, Laguna Beach, CA',
+          'Live tides, waves, and weather for Laguna Beach beaches',
         theme_color: '#0a1628',
         background_color: '#0a1628',
         display: 'standalone',

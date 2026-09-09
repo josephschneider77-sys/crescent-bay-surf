@@ -1,4 +1,4 @@
-import { LOCATION, M_TO_FT } from './config'
+import { M_TO_FT, TIMEZONE, type Beach } from './beaches'
 import type { MarineCurrent, MarineHour } from './types'
 
 type OpenMeteoMarine = {
@@ -21,14 +21,14 @@ type OpenMeteoMarine = {
   }
 }
 
-export async function fetchMarine(): Promise<{
+export async function fetchMarine(beach: Beach): Promise<{
   current: MarineCurrent
   hourly: MarineHour[]
 }> {
   const params = new URLSearchParams({
-    latitude: String(LOCATION.lat),
-    longitude: String(LOCATION.lon),
-    timezone: LOCATION.timezone,
+    latitude: String(beach.lat),
+    longitude: String(beach.lon),
+    timezone: TIMEZONE,
     forecast_days: '3',
     current: [
       'wave_height',

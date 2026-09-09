@@ -1,4 +1,4 @@
-import { LOCATION } from './config'
+import { TIMEZONE, type Beach } from './beaches'
 import type { WeatherCurrent, WeatherDay, WeatherHour } from './types'
 
 type OpenMeteoForecast = {
@@ -30,15 +30,15 @@ type OpenMeteoForecast = {
   }
 }
 
-export async function fetchWeather(): Promise<{
+export async function fetchWeather(beach: Beach): Promise<{
   current: WeatherCurrent
   hourly: WeatherHour[]
   daily: WeatherDay[]
 }> {
   const params = new URLSearchParams({
-    latitude: String(LOCATION.lat),
-    longitude: String(LOCATION.lon),
-    timezone: LOCATION.timezone,
+    latitude: String(beach.lat),
+    longitude: String(beach.lon),
+    timezone: TIMEZONE,
     temperature_unit: 'fahrenheit',
     wind_speed_unit: 'mph',
     precipitation_unit: 'inch',
@@ -83,8 +83,7 @@ export async function fetchWeather(): Promise<{
     windDir: data.current.wind_direction_10m,
   }
 
-  // Today's remaining hours (from current hour through end of day) + a bit of next
-  const nowIso = data.current.time.slice(0, 13) // YYYY-MM-DDTHH
+  const nowIso = data.current.time.slice(0, 13)
   const startIdx = Math.max(
     0,
     data.hourly.time.findIndex((t) => t.startsWith(nowIso) || t >= data.current.time),

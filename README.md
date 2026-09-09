@@ -1,28 +1,30 @@
-# Crescent Bay Surf
+# Laguna Beach Surf
 
-Mobile-first Progressive Web App for **live tides, waves, and weather** at Crescent Bay, Laguna Beach, CA.
+Mobile-first Progressive Web App for **live tides, waves, and weather** across major Laguna Beach, CA beaches.
 
-Designed to open on a phone: large outdoor-readable type, dark coastal palette, single-scroll layout.
+Designed to open on a phone: large outdoor-readable type, dark coastal palette, single-scroll layout, beach picker with last-spot memory.
 
 ## Features
 
+- **Multi-beach** — Main Beach (default), Crescent Bay, Diver’s Cove, Shaw’s Cove, Picnic/Heisler, Thalia, Woods Cove, Victoria, Treasure Island, Aliso, Thousand Steps
+- **Beach picker** — dropdown + horizontal chips; last choice saved in `localStorage`
 - **Right now** — temperature, waves, wind, next-tide countdown
 - **Tides** — today’s highs/lows + curve (NOAA CO-OPS station **9410580**)
-- **Waves / marine** — significant height, period, direction, swell, wind waves
+- **Waves / marine** — significant height, period, direction, swell, wind waves (per-beach lat/lon via Open-Meteo)
 - **Forecast** — hourly today + 7-day (Open-Meteo)
-- **PWA** — installable, offline shell + cached recent API responses
+- **PWA** — installable; Android tip: ⋮ → Add to Home screen
 - Loading / error / offline states and a refresh control
 
 ## Location
 
 | | |
 |---|---|
-| Spot | Crescent Bay, Laguna Beach, CA |
-| Coordinates | ~33.5456°N, 117.8023°W |
+| Region | Laguna Beach, CA |
+| Default spot | **Main Beach** |
 | Timezone | America/Los_Angeles |
 | Tide station | **9410580** Newport Beach / Newport Bay Entrance |
 
-Tide heights are **nearby Newport Beach predictions**, not a gauge on Crescent Bay itself (~6 mi NW). Labeled clearly in the UI.
+Per-beach coordinates drive Open-Meteo weather + marine. Tide heights are **nearby Newport Beach predictions**, labeled clearly in the UI (same station for all Laguna spots).
 
 ## Data sources
 
@@ -41,8 +43,6 @@ npm run dev
 
 `npm run dev` already binds `--host` so other devices on your Wi‑Fi can connect.
 
-Then open the printed Network URL on your phone (same Wi‑Fi), e.g. `http://192.168.x.x:5173`.
-
 ### Build
 
 ```bash
@@ -52,31 +52,15 @@ npm run preview
 
 Static output is in `dist/`.
 
-## Open on your phone today
+## Open on your phone
 
-**Live public URL (recommended):** https://josephschneider77-sys.github.io/crescent-bay-surf-web/
+**Live public URL:** https://josephschneider77-sys.github.io/crescent-bay-surf-web/
 
-Built static site is mirrored to the public companion repo [`crescent-bay-surf-web`](https://github.com/josephschneider77-sys/crescent-bay-surf-web) so GitHub Pages works despite this source repo being private. Open that link on your phone; optional: Share → Add to Home Screen.
+Built static site is mirrored to the public companion repo [`crescent-bay-surf-web`](https://github.com/josephschneider77-sys/crescent-bay-surf-web).
 
-**Option A — same Wi‑Fi (fastest)**
+**Android install:** Chrome ⋮ → **Add to Home screen** / Install app (there is no separate store download button).
 
-1. On this machine: `npm install && npm run dev`
-2. Note the **Network** URL Vite prints (`http://<lan-ip>:5173`)
-3. On your phone (same Wi‑Fi), open that URL
-4. Optional: Share → Add to Home Screen for the PWA icon
-
-**Option B — public tunnel** (phone off your LAN)
-
-```bash
-npm run build && npm run preview -- --host --port 4173
-# in another terminal, if you have cloudflared:
-cloudflared tunnel --url http://localhost:4173
-# or: npx --yes localtunnel --port 4173
-```
-
-**Option C — GitHub Pages**
-
-This repo is **private**. GitHub Pages for private repos needs GitHub Pro (or make the repo public). To add Pages later: add a GitHub Actions workflow that builds with `npm ci && npm run build` and deploys `dist/` (needs a token with the `workflow` scope), then Settings → Pages → Source: GitHub Actions.
+**iOS:** Safari Share → Add to Home Screen.
 
 ## Stack
 

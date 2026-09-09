@@ -1,15 +1,11 @@
-export const LOCATION = {
-  name: 'Crescent Bay',
-  place: 'Laguna Beach, CA',
-  lat: 33.5456,
-  lon: -117.8023,
-  timezone: 'America/Los_Angeles',
-} as const
-
-export const NOAA_STATION = {
-  id: '9410580',
-  label: 'Newport Beach / Newport Bay Entrance',
-  note: 'Nearby Newport Beach predictions — not a station on Crescent Bay itself (~6 mi NW).',
-} as const
-
-export const M_TO_FT = 3.28084
+/** @deprecated Prefer importing from ./beaches — kept for any leftover single-spot refs. */
+export {
+  APP_PLACE,
+  BEACHES,
+  DEFAULT_BEACH_ID,
+  M_TO_FT,
+  NOAA_STATION,
+  TIMEZONE,
+  getBeachById,
+  type Beach,
+} from './beaches'

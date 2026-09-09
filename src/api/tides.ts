@@ -1,4 +1,4 @@
-import { NOAA_STATION } from './config'
+import { NOAA_STATION } from './beaches'
 import type { TideCurvePoint, TideEvent } from './types'
 
 type NoaaPrediction = { t: string; v: string; type?: string }
@@ -9,14 +9,14 @@ function todayYmdPacific(): string {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
-  }).format(new Date()) // YYYY-MM-DD
+  }).format(new Date())
 }
 
 function buildNoaaUrl(interval: 'hilo' | '15'): string {
   const begin = todayYmdPacific().replace(/-/g, '')
   const params = new URLSearchParams({
     product: 'predictions',
-    application: 'crescent-bay-surf',
+    application: 'laguna-beach-surf',
     begin_date: begin,
     range: interval === 'hilo' ? '48' : '36',
     datum: 'MLLW',
@@ -30,7 +30,6 @@ function buildNoaaUrl(interval: 'hilo' | '15'): string {
 }
 
 async function fetchNoaaJson(query: string): Promise<{ predictions?: NoaaPrediction[] }> {
-  // Dev: Vite proxy avoids CORS. Prod: try NOAA direct, then CORS-friendly mirrors.
   const candidates = import.meta.env.DEV
     ? [`/api/noaa?${query}`]
     : [

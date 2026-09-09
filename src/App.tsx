@@ -1,22 +1,24 @@
+import { BeachPicker } from './components/BeachPicker'
 import { ForecastSection } from './components/ForecastSection'
+import { InstallTip } from './components/InstallTip'
 import { NowSummary } from './components/NowSummary'
 import { TideSection } from './components/TideSection'
 import { WaveSection } from './components/WaveSection'
+import { APP_PLACE } from './api'
 import { useSurfData } from './hooks/useSurfData'
-import { LOCATION } from './api/config'
 import { formatDateLong } from './utils/format'
 
 function App() {
-  const { data, status, error, isRefreshing, refresh } = useSurfData()
+  const { beach, setBeach, data, status, error, isRefreshing, refresh } = useSurfData()
 
   return (
     <div className="app">
       <header className="topbar">
         <div>
-          <p className="brand">Crescent Bay Surf</p>
+          <p className="brand">Laguna Beach Surf</p>
           <h1>
-            {LOCATION.name}
-            <span className="place"> · {LOCATION.place}</span>
+            {beach.name}
+            <span className="place"> · {APP_PLACE}</span>
           </h1>
           <p className="date-line">{formatDateLong()}</p>
         </div>
@@ -32,6 +34,14 @@ function App() {
           </span>
         </button>
       </header>
+
+      <BeachPicker
+        beach={beach}
+        onChange={setBeach}
+        disabled={isRefreshing}
+      />
+
+      <InstallTip />
 
       {status === 'offline' && (
         <div className="banner warn" role="status">
@@ -77,15 +87,15 @@ function App() {
                 hour: 'numeric',
                 minute: '2-digit',
               })}{' '}
-              PT
+              PT · {beach.name}
             </p>
             <p>
-              Weather & marine: Open-Meteo · Tides: NOAA CO-OPS {LOCATION.lat}°N,{' '}
-              {Math.abs(LOCATION.lon)}°W
+              Weather & marine: Open-Meteo @ {beach.lat.toFixed(4)}°N,{' '}
+              {Math.abs(beach.lon).toFixed(4)}°W · Tides: NOAA CO-OPS (Laguna-wide)
             </p>
             <p className="fine-print">
-              Install to home screen for a phone-ready app experience. No ads, no
-              login.
+              Add to Home screen for a phone-ready app. No ads, no login. Covers major
+              Laguna Beach spots — pick any beach above.
             </p>
           </footer>
         </main>
