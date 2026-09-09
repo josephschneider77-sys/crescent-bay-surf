@@ -72,7 +72,7 @@ cloudflared tunnel --url http://localhost:4173
 
 **Option C — GitHub Pages**
 
-This repo is **private**. GitHub Pages for private repos needs GitHub Pro (or a public repo). A Pages workflow is included under `.github/workflows/pages.yml`; enable Pages (Settings → Pages → Source: GitHub Actions) if/when the account allows it.
+This repo is **private**. GitHub Pages for private repos needs GitHub Pro (or make the repo public). To add Pages later: add a GitHub Actions workflow that builds with `npm ci && npm run build` and deploys `dist/` (needs a token with the `workflow` scope), then Settings → Pages → Source: GitHub Actions.
 
 ## Stack
 
