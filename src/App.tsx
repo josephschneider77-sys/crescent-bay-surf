@@ -13,9 +13,24 @@ function App() {
 
   return (
     <div className="app">
+      <div className="civic-banner" role="banner">
+        <img
+          className="civic-crest"
+          src="./brand/city-seal-256.png"
+          width={52}
+          height={52}
+          alt="City of Laguna Beach seal"
+        />
+        <div className="civic-banner-text">
+          <p className="civic-kicker">City of Laguna Beach</p>
+          <p className="civic-title">Surf &amp; Tide Conditions</p>
+          <p className="civic-sub">Community beach conditions · California</p>
+        </div>
+      </div>
+
       <header className="topbar">
         <div>
-          <p className="brand">Laguna Beach Surf</p>
+          <p className="brand">Selected beach</p>
           <h1>
             {beach.name}
             <span className="place"> · {APP_PLACE}</span>
@@ -59,7 +74,7 @@ function App() {
           <div className="skel skel-lg" />
           <div className="skel" />
           <div className="skel" />
-          <p className="loading-copy">Pulling tides, waves & weather…</p>
+          <p className="loading-copy">Pulling tides, waves &amp; weather…</p>
         </div>
       )}
 
@@ -90,15 +105,26 @@ function App() {
               PT · {beach.name}
             </p>
             <p>
-              Weather & marine: Open-Meteo @ {beach.lat.toFixed(4)}°N,{' '}
+              Weather &amp; marine: Open-Meteo @ {beach.lat.toFixed(4)}°N,{' '}
               {Math.abs(beach.lon).toFixed(4)}°W · Tides: NOAA CO-OPS (Laguna-wide)
             </p>
             <p className="fine-print">
-              Add to Home screen for a phone-ready app. No ads, no login. Covers major
-              Laguna Beach spots — pick any beach above.
+              Install from your browser for a home-screen app. No ads, no login. Covers
+              major Laguna Beach spots — pick any beach above.
+            </p>
+            <p className="disclaimer">
+              <strong>Unofficial community conditions app — not an official City publication.</strong>{' '}
+              Seal artwork sourced from Wikimedia Commons (copied from the City website;
+              treated as a California public record). Conditions are for personal use only.
             </p>
           </footer>
         </main>
+      )}
+
+      {!data && (
+        <p className="disclaimer" style={{ marginTop: 16 }}>
+          <strong>Unofficial community conditions app — not an official City publication.</strong>
+        </p>
       )}
     </div>
   )

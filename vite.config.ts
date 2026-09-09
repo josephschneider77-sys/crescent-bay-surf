@@ -8,18 +8,26 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
+      includeAssets: [
+        'favicon.svg',
+        'apple-touch-icon.png',
+        'brand/city-seal-256.png',
+        'brand/city-seal.png',
+        'icons/favicon-64.png',
+      ],
       manifest: {
-        name: 'Laguna Beach Surf',
-        short_name: 'Laguna Surf',
+        name: 'Laguna Beach Surf Conditions',
+        short_name: 'LB Surf',
         description:
-          'Live tides, waves, and weather for Laguna Beach beaches',
-        theme_color: '#0a1628',
-        background_color: '#0a1628',
+          'Unofficial community tides, waves, and weather for Laguna Beach beaches. Not an official City publication.',
+        theme_color: '#034A46',
+        background_color: '#F5F8F8',
         display: 'standalone',
         orientation: 'portrait',
         start_url: './',
         scope: './',
+        categories: ['weather', 'lifestyle'],
+        lang: 'en-US',
         icons: [
           {
             src: 'icons/icon-192.png',
@@ -32,7 +40,7 @@ export default defineConfig({
             type: 'image/png',
           },
           {
-            src: 'icons/icon-512.png',
+            src: 'icons/icon-512-maskable.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'maskable',

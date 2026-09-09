@@ -79,8 +79,8 @@ function CurveSvg({
     >
       <defs>
         <linearGradient id="tideFill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="rgba(94, 210, 220, 0.45)" />
-          <stop offset="100%" stopColor="rgba(94, 210, 220, 0.02)" />
+          <stop offset="0%" stopColor="rgba(25, 119, 162, 0.35)" />
+          <stop offset="100%" stopColor="rgba(25, 119, 162, 0.02)" />
         </linearGradient>
       </defs>
       <path d={area} fill="url(#tideFill)" />
@@ -91,7 +91,7 @@ function CurveSvg({
           x2={nowX}
           y1={padY / 2}
           y2={h - 4}
-          stroke="rgba(255,255,255,0.45)"
+          stroke="rgba(2, 62, 59, 0.35)"
           strokeDasharray="3 3"
         />
       )}
@@ -102,7 +102,7 @@ function CurveSvg({
           cy={yOf(m.heightFt)}
           r={4}
           fill={m.type === 'H' ? 'var(--accent-warm)' : 'var(--accent)'}
-          stroke="#0a1628"
+          stroke="#ffffff"
           strokeWidth="1.5"
         />
       ))}
