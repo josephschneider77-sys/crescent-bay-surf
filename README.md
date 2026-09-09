@@ -54,6 +54,10 @@ Static output is in `dist/`.
 
 ## Open on your phone today
 
+**Live public URL (recommended):** https://josephschneider77-sys.github.io/crescent-bay-surf-web/
+
+Built static site is mirrored to the public companion repo [`crescent-bay-surf-web`](https://github.com/josephschneider77-sys/crescent-bay-surf-web) so GitHub Pages works despite this source repo being private. Open that link on your phone; optional: Share → Add to Home Screen.
+
 **Option A — same Wi‑Fi (fastest)**
 
 1. On this machine: `npm install && npm run dev`
