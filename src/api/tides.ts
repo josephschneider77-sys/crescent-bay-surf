@@ -12,13 +12,24 @@ function todayYmdPacific(): string {
   }).format(new Date())
 }
 
+/** Pacific calendar date offset by `days` from today (negative = past). */
+function ymdPacificOffset(days: number): string {
+  const [y, m, d] = todayYmdPacific().split('-').map(Number)
+  const utc = new Date(Date.UTC(y, m - 1, d + days))
+  const yy = utc.getUTCFullYear()
+  const mm = String(utc.getUTCMonth() + 1).padStart(2, '0')
+  const dd = String(utc.getUTCDate()).padStart(2, '0')
+  return `${yy}-${mm}-${dd}`
+}
+
 function buildNoaaUrl(interval: 'hilo' | '15'): string {
-  const begin = todayYmdPacific().replace(/-/g, '')
+  // Start yesterday so a now-centered chart has past tide samples on the left
+  const begin = ymdPacificOffset(-1).replace(/-/g, '')
   const params = new URLSearchParams({
     product: 'predictions',
     application: 'laguna-beach-surf',
     begin_date: begin,
-    range: interval === 'hilo' ? '48' : '36',
+    range: interval === 'hilo' ? '72' : '48',
     datum: 'MLLW',
     station: NOAA_STATION.id,
     time_zone: 'lst_ldt',
