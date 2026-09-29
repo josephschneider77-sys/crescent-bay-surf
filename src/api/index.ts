@@ -21,7 +21,8 @@ export async function fetchSurfBundle(beach: Beach): Promise<SurfBundle> {
   }
 }
 
-export type { SurfBundle } from './types'
+export { fetchWaterTemp } from './waterTemp'
+export type { SurfBundle, WaterTemp } from './types'
 export type { Beach } from './beaches'
 export {
   APP_PLACE,
