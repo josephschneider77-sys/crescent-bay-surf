@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   fetchSurfBundle,
+  fetchWaterTemp,
   getBeachById,
   loadSavedBeachId,
   saveBeachId,
   type Beach,
   type SurfBundle,
+  type WaterTemp,
 } from '../api'
 
 type Status = 'idle' | 'loading' | 'success' | 'error' | 'offline'
@@ -16,6 +18,8 @@ export function useSurfData() {
   const [status, setStatus] = useState<Status>('loading')
   const [error, setError] = useState<string | null>(null)
   const [isRefreshing, setIsRefreshing] = useState(false)
+  // Water temp shown on the error card when the full bundle (e.g. weather) fails
+  const [fallbackWater, setFallbackWater] = useState<WaterTemp | null>(null)
   const mounted = useRef(true)
   const hasData = useRef(false)
   const beachRef = useRef(beach)
@@ -37,6 +41,7 @@ export function useSurfData() {
       // Ignore stale responses if the user switched beaches mid-fetch
       if (beachRef.current.id !== target.id) return
       setData(bundle)
+      setFallbackWater(null)
       hasData.current = true
       setStatus('success')
     } catch (err) {
@@ -44,6 +49,10 @@ export function useSurfData() {
       if (beachRef.current.id !== target.id) return
       setError(err instanceof Error ? err.message : 'Failed to load conditions')
       setStatus(hasData.current ? 'success' : 'error')
+      if (!hasData.current) {
+        const water = await fetchWaterTemp(target)
+        if (mounted.current && beachRef.current.id === target.id) setFallbackWater(water)
+      }
     } finally {
       if (mounted.current) setIsRefreshing(false)
     }
@@ -56,6 +65,7 @@ export function useSurfData() {
       setBeachState(next)
       hasData.current = false
       setData(null)
+      setFallbackWater(null)
       void load(false, next)
     },
     [load],
@@ -81,6 +91,7 @@ export function useSurfData() {
     beach,
     setBeach,
     data,
+    fallbackWater,
     status,
     error,
     isRefreshing,

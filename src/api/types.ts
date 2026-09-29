@@ -57,16 +57,9 @@ export type MarineHour = {
   swellHeightFt: number
 }
 
-export type WaterTempDay = {
-  date: string
-  minF: number
-  maxF: number
-}
-
 export type WaterTemp = {
   time: string
   tempF: number
-  days: WaterTempDay[]
 }
 
 export type SurfBundle = {

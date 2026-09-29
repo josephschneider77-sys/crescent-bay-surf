@@ -1,7 +1,7 @@
 import { BeachPicker } from './components/BeachPicker'
 import { ForecastSection } from './components/ForecastSection'
 import { InstallTip } from './components/InstallTip'
-import { NowSummary } from './components/NowSummary'
+import { NowSummary, WaterTempInline } from './components/NowSummary'
 import { TideSection } from './components/TideSection'
 import { WaveSection } from './components/WaveSection'
 import { APP_PLACE } from './api'
@@ -9,7 +9,7 @@ import { useSurfData } from './hooks/useSurfData'
 import { formatDateLong } from './utils/format'
 
 function App() {
-  const { beach, setBeach, data, status, error, isRefreshing, refresh } = useSurfData()
+  const { beach, setBeach, data, fallbackWater, status, error, isRefreshing, refresh } = useSurfData()
 
   return (
     <div className="app">
@@ -81,6 +81,9 @@ function App() {
       {status === 'error' && !data && (
         <div className="card error-card" role="alert">
           <h2>Couldn’t load conditions</h2>
+          <p className="error-water">
+            <WaterTempInline tempF={fallbackWater?.tempF} />
+          </p>
           <p>{error}</p>
           <button type="button" className="primary" onClick={() => void refresh()}>
             Try again
