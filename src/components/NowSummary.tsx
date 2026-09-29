@@ -14,7 +14,7 @@ type Props = { data: SurfBundle }
 
 /** Compact inline water temp; shows '—' when the SST fetch failed. */
 export function WaterTempInline({ tempF }: { tempF?: number | null }) {
-  const text = typeof tempF === 'number' ? `${Math.round(tempF)}°` : '—'
+  const text = typeof tempF === 'number' ? `${tempF.toFixed(1)}°` : '—'
   return (
     <span className="water-inline" aria-label={`Water temperature ${text}`}>
       <span aria-hidden>🌊</span>
