@@ -247,6 +247,52 @@ button {
   min-width: 110px;
 }
 
+.hero-water {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--coastal-soft);
+  border: 1px solid var(--stroke);
+}
+
+.hero-water .metric-value.water-value {
+  color: var(--ocean);
+}
+
+.water-trend {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.water-trend li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.water-day {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.water-range {
+  color: var(--teal-deep);
+  font-size: 0.95rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .hero-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
