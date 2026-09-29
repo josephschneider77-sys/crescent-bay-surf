@@ -60,7 +60,7 @@ export function NowSummary({ data }: Props) {
             {waterTemp.days.slice(0, 3).map((d, i) => (
               <li key={d.date}>
                 <span className="water-day">
-                  {i === 0 ? 'Today' : formatWeekday(d.date)}
+                  {i === 0 ? 'Today' : formatWeekday(`${d.date}T12:00`)}
                 </span>
                 <span className="water-range">
                   {Math.round(d.minF) === Math.round(d.maxF)
