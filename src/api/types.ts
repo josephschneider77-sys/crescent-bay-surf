@@ -57,6 +57,18 @@ export type MarineHour = {
   swellHeightFt: number
 }
 
+export type WaterTempDay = {
+  date: string
+  minF: number
+  maxF: number
+}
+
+export type WaterTemp = {
+  time: string
+  tempF: number
+  days: WaterTempDay[]
+}
+
 export type SurfBundle = {
   weather: {
     current: WeatherCurrent
@@ -73,5 +85,7 @@ export type SurfBundle = {
     station: string
     stationNote: string
   }
+  /** null when the sea-surface-temperature source is unavailable */
+  waterTemp: WaterTemp | null
   fetchedAt: Date
 }

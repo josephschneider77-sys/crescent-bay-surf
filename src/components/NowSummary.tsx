@@ -6,6 +6,7 @@ import {
   formatPeriod,
   formatRelativeCountdown,
   formatTemp,
+  formatWeekday,
   parseLocal,
 } from '../utils/format'
 import { weatherEmoji, weatherLabel } from '../utils/weatherCodes'
@@ -13,7 +14,7 @@ import { weatherEmoji, weatherLabel } from '../utils/weatherCodes'
 type Props = { data: SurfBundle }
 
 export function NowSummary({ data }: Props) {
-  const { weather, marine, tides } = data
+  const { weather, marine, tides, waterTemp } = data
   const now = new Date()
   const nextTide = tides.events
     .map((e) => ({ ...e, at: parseLocal(e.time) }))
@@ -43,6 +44,33 @@ export function NowSummary({ data }: Props) {
             {compassFromDeg(marine.current.waveDir)}
           </p>
         </div>
+      </div>
+
+      <div className="hero-water" aria-label="Ocean water temperature">
+        <div className="hero-water-now">
+          <p className="metric-label">
+            <span aria-hidden>🌊</span> Water temp
+          </p>
+          <p className="metric-value water-value">
+            {waterTemp ? `${Math.round(waterTemp.tempF)}°F` : '—'}
+          </p>
+        </div>
+        {waterTemp && waterTemp.days.length > 0 && (
+          <ul className="water-trend" aria-label="Water temperature trend">
+            {waterTemp.days.slice(0, 3).map((d, i) => (
+              <li key={d.date}>
+                <span className="water-day">
+                  {i === 0 ? 'Today' : formatWeekday(d.date)}
+                </span>
+                <span className="water-range">
+                  {Math.round(d.minF) === Math.round(d.maxF)
+                    ? `${Math.round(d.maxF)}°`
+                    : `${Math.round(d.minF)}–${Math.round(d.maxF)}°`}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       <div className="hero-grid">
